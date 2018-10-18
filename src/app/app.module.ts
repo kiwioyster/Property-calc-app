@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { RentalYieldComponent } from '../pages/about/rental-yield.component';
+import { RentalYieldComponent } from '../pages/rental-yield/rental-yield.component';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { MortgageCostComponent } from '../pages/mortgage-cost/mortgage-cost.component';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,7 +17,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     MyApp,
     RentalYieldComponent,
     ContactPage,
-    HomePage,
+    MortgageCostComponent,
     TabsPage
   ],
   imports: [
@@ -30,7 +30,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     MyApp,
     RentalYieldComponent,
     ContactPage,
-    HomePage,
+    MortgageCostComponent,
     TabsPage
   ],
   providers: [

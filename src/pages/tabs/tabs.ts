@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 
-import { RentalYieldComponent } from '../about/rental-yield.component';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { RentalYieldComponent } from '../rental-yield/rental-yield.component';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
+  tab1Root = RentalYieldComponent;
   tab2Root = RentalYieldComponent;
-  tab3Root = ContactPage;
 
   constructor() {
 
