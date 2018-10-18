@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Gross Rental Yield (per annum)
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="Title">
+    {{outputYieldValue}}
+  </p>
+  <div class="radio-wrapper">
+    <div class="inputGroup">
+      <input id="radio1" name="radio" type="radio" checked="checked" (change)="rentFrequency('monthly')" />
+      <label for="radio1">Monthly Rent</label>
+    </div>
+    <div class="inputGroup">
+      <input id="radio2" name="radio" type="radio" (change)="rentFrequency('weekly')" />
+      <label for="radio2">Weekly Rent</label>
+    </div>
+  </div>
+
+  <div class="Input">
+    <input type="number" class="Input-text" placeholder="Asset Price" [(ngModel)]="price" (ngModelChange)="calcRentalYield()">
+    <label for="input" class="Input-label">Asset Price</label>
+  </div>
+
+  <div class="Input">
+    <input type="number" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" [(ngModel)]="rent"
+      (ngModelChange)="calcRentalYield()" />
+    <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
+  </div>
+
+</ion-content>

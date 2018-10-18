@@ -1,0 +1,320 @@
+@import "./ionic.globals";
+
+
+
+
+
+// A new dark theme for ionic2+
+// ----------------------------------------
+
+// this can go into variables.scss too - I like 
+// it here so its in one place. If you move it to variables.scss,
+// remember to copy over the complete map and then extend it
+$colors: (primary: (base: #71D58E, contrast:#000),
+secondary: (base: #168298, contrast: #000),
+danger: #f43e00,
+light: (base:#bdc3c7, contrast:#000),
+dark: (base:#d35400, contrast:#000),
+alert: #F39C12,
+
+) !default;
+
+
+$text-color: #DADFE1 !default;
+$link-color: color($colors, primary) !default;
+$background-color: #363232 !default;
+$subdued-text-color: #666 !default;
+
+$font-family-base: "Helvetica Neue",
+"Roboto",
+sans-serif !default;
+$font-size-base: 1.4rem !default; // 1.4rem == 14px
+
+$content-padding: 16px !default;
+$content-margin: 16px !default;
+
+$content-outer-background: #000;
+
+$toolbar-background: #434343 !default;
+$toolbar-border-color: #434343 !default;
+
+$toolbar-active-color: $link-color !default;
+$toolbar-inactive-color: #8c8c8c !default;
+
+$tabs-background: $toolbar-background !default;
+$tabs-border-color: $toolbar-border-color !default;
+$tabs-tab-color-inactive: #8c8c8c !default;
+$tabs-tab-color-active: $link-color !default;
+
+$list-text-color: $text-color !default;
+$list-background-color: #242424 !default;
+$list-border-color: #4C4C4C !default;
+$list-header-color: $text-color !default;
+$list-activated-background-color: #656565 !default;
+
+
+$card-text-color: $text-color !default;
+
+
+$item-divider-color: $text-color !default;
+$item-divider-background: #515151 !default;
+
+$toast-background: #019875 !default;
+
+
+$tabs-tab-color-inactive: #808080 !default;
+
+$searchbar-input-text-color: #bdc3c7 !default;
+$searchbar-input-placeholder-color: #A3A8AC !default;
+$searchbar-input-background-color: #313131 !default;
+
+$toggle-background-color-off:#696969 !default;
+$toggle-background-color-on:#eeae15 !default;
+
+
+$alert-background: $toolbar-background !default;
+$alert-button-background-color-activated: lighten($alert-background, 30%) !default;
+$alert-message-text-color: $text-color !default;
+$alert-input-background-color: #bdc3c7 !default;
+$alert-input-text-color: #242424 !default;
+
+
+::-webkit-scrollbar {
+  background-color: $toolbar-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #696969;
+}
+
+.alert-input {
+  color: $alert-input-text-color;
+  background-color: $alert-input-background-color;
+}
+
+body {
+  //background-color: $background-color;
+  color: $text-color;
+}
+
+// ------------------
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+:root {
+  /* generic */
+  --gutterSm: 0.4rem;
+  --gutterMd: 0.8rem;
+  --gutterLg: 1.6rem;
+  --gutterXl: 2.4rem;
+  --gutterXx: 7.2rem;
+  --colorPrimary400: #7cea9c;
+  --colorPrimary600: #71d58e;
+  --colorPrimary800: #66c080;
+  --fontFamily: "Dosis", sans-serif;
+  --fontSizeSm: 1.2rem;
+  --fontSizeMd: 1.6rem;
+  --fontSizeLg: 2.1rem;
+  --fontSizeXl: 2.8rem;
+  --fontSizeXx: 4.8rem;
+  --lineHeightSm: 1.1;
+  --lineHeightMd: 1.8;
+  --transitionDuration: 300ms;
+  --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  /* floated labels */
+  --inputPaddingV: var(--gutterMd);
+  --inputPaddingH: var(--gutterLg);
+  --inputFontSize: var(--fontSizeLg);
+  --inputLineHeight: var(--lineHeightMd);
+  --labelScaleFactor: 0.8;
+  --labelDefaultPosY: 50%;
+  --labelTransformedPosY: calc((var(--labelDefaultPosY)) - (var(--inputPaddingV) * var(--labelScaleFactor)) - (var(--inputFontSize) * var(--inputLineHeight)));
+  --inputTransitionDuration: var(--transitionDuration);
+  --inputTransitionTF: var(--transitionTF);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.Input {
+  position: relative;
+  margin-bottom: 64px;
+}
+
+.Input-text {
+  display: block;
+  margin: 0;
+  padding: var(--inputPaddingV) var(--inputPaddingH);
+  color: $subdued-text-color;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--inputFontSize);
+  font-weight: inherit;
+  line-height: var(--inputLineHeight);
+  border: none;
+  border-radius: 0.6rem;
+  transition: box-shadow var(--transitionDuration);
+  border: 2px solid white;
+}
+
+.Input-text::placeholder {
+  color: color($colors, light);
+}
+
+.Input-text:focus {
+  outline: none;
+  border: 2px solid color($colors, primary);
+}
+
+.Input-label {
+  display: block;
+  position: absolute;
+  bottom: 50%;
+  left: 1rem;
+  color: white;
+  font-family: inherit;
+  font-size: var(--inputFontSize);
+  font-weight: inherit;
+  line-height: var(--inputLineHeight);
+  opacity: 0;
+  transform:
+    translate3d(0, var(--labelDefaultPosY), 0) scale(1);
+  transform-origin: 0 0;
+  transition:
+    opacity var(--inputTransitionDuration) var(--inputTransitionTF),
+    transform var(--inputTransitionDuration) var(--inputTransitionTF),
+    visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
+    z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
+}
+
+.Input-text:placeholder-shown+.Input-label {
+  visibility: hidden;
+  z-index: -1;
+}
+
+.Input-text:not(:placeholder-shown)+.Input-label,
+.Input-text:focus:not(:placeholder-shown)+.Input-label {
+  visibility: visible;
+  z-index: 1;
+  opacity: 1;
+  transform:
+    translate3d(0, var(--labelTransformedPosY), 0) scale(var(--labelScaleFactor));
+  transition:
+    transform var(--inputTransitionDuration),
+    visibility 0ms,
+    z-index 0ms;
+}
+
+.Title {
+  margin: 48px 0 64px 0;
+  padding: 0;
+  color: #fff;
+  font-size: var(--fontSizeXx);
+  font-weight: 400;
+  line-height: var(--lineHeightSm);
+  text-align: center;
+  text-shadow: -0.1rem 0.1rem 0.2rem color($colors, primary);
+}
+
+// ----------------
+
+.inputGroup {
+  display: block;
+  position: relative;
+  flex: 0 50%;
+
+  label {
+    padding: 16px 24px;
+    width: 100%;
+    display: block;
+    text-align: left;
+    color: $subdued-text-color;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    font-size: 120%;
+
+    &[for=radio2] {
+      border-top-right-radius: 0.6rem;
+      border-bottom-right-radius: 0.6rem;
+    }
+
+    &[for=radio1] {
+      border-top-left-radius: 0.6rem;
+      border-bottom-left-radius: 0.6rem;
+    }
+
+    &:before {
+      width: 10px;
+      height: 10px;
+      content: '';
+      position: absolute;
+      background-color: color($colors, secondary);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale3d(1, 1, 1);
+      transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    &:after {
+      width: 32px;
+      height: 32px;
+      content: '';
+      border: 2px solid #D1D7DC;
+      background-color: white;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      background-position: 2px 3px;
+      border-radius: 50%;
+      z-index: 2;
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: all 200ms ease-in;
+    }
+  }
+
+  input:checked~label {
+    color: #fff;
+
+    &:before {
+      transform: translate(-50%, -50%) scale3d(56, 56, 1);
+      opacity: 1;
+    }
+
+    &:after {
+      background-color: color($colors, primary);
+      border-color: color($colors, primary);
+    }
+  }
+
+  input {
+    width: 28px;
+    height: 28px;
+    order: 1;
+    z-index: 2;
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    visibility: hidden;
+  }
+}
+
+.radio-wrapper {
+  background-color: white;
+  margin: 12px 0 64px 0;
+  display: flex;
+  border-radius: 0.6rem;
+}
+
+@import "./dark.platforms.scss"
