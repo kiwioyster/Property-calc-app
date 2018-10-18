@@ -22,13 +22,14 @@
   </div>
 
   <div class="Input">
-    <input type="number" class="Input-text" placeholder="Asset Price" [(ngModel)]="price" (ngModelChange)="calcRentalYield()">
+    <input type="tel" class="Input-text" placeholder="Asset Price" [(ngModel)]="price" (ngModelChange)="priceOnChange()"
+      [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Asset Price</label>
   </div>
 
   <div class="Input">
-    <input type="number" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" [(ngModel)]="rent"
-      (ngModelChange)="calcRentalYield()" />
+    <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" [(ngModel)]="rent"
+      (ngModelChange)="rentOnChange()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
   </div>
 

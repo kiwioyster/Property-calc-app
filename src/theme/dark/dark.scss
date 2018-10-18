@@ -102,9 +102,9 @@ body {
 
 :root {
   /* generic */
-  --gutterSm: 0.4rem;
-  --gutterMd: 0.8rem;
-  --gutterLg: 1.6rem;
+  --gutterSm: 0.3rem;
+  --gutterMd: 0.6rem;
+  --gutterLg: 1.8rem;
   --gutterXl: 2.4rem;
   --gutterXx: 7.2rem;
   --colorPrimary400: #7cea9c;
@@ -141,7 +141,7 @@ body {
 
 .Input {
   position: relative;
-  margin-bottom: 64px;
+  margin-bottom: 40px;
 }
 
 .Input-text {
@@ -209,7 +209,7 @@ body {
 }
 
 .Title {
-  margin: 48px 0 64px 0;
+  margin: 6px 0 24px 0;
   padding: 0;
   color: #fff;
   font-size: var(--fontSizeXx);
@@ -312,7 +312,7 @@ body {
 
 .radio-wrapper {
   background-color: white;
-  margin: 12px 0 64px 0;
+  margin: 12px 0 40px 0;
   display: flex;
   border-radius: 0.6rem;
 }
