@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Gross Yield per Annum
+      {{grossPrefix}} Yield per Annum
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -31,6 +31,12 @@
     <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" (keydown.enter)="$event.target.blur()"
       [(ngModel)]="rent" (ngModelChange)="rentOnChange()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
+  </div>
+
+  <div class="Input">
+    <input type="tel" class="Input-text" placeholder="Annual Expense (optional)" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="expense" (ngModelChange)="expenseOnChange()" [textMask]="{mask: currencyMask}" />
+    <label for="input" class="Input-label">Annual Expense</label>
   </div>
 
 </ion-content>

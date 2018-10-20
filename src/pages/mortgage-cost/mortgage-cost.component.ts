@@ -99,7 +99,7 @@ export class MortgageCostComponent {
     return Number(duration.replace('Years', '')) * 12;
   }
 
-  paymentFrequenceChange(value: string) {
+  paymentFrequencyChange(value: string) {
     this.paymentFrequence = value;
     this.calcRentalYield();
   }

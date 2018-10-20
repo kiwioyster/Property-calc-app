@@ -9,8 +9,14 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 export class RentalYieldComponent {
   rent: string;
   price: string;
+  expense: string;
+
   rentNumber: number;
   priceNumber: number;
+  expenseNumber: number = 0;
+
+  grossPrefix = 'Gross';
+
   outputYieldValue = '-- %';
   rentFrequencyValue = 'Month';
   currencyMask = createNumberMask({
@@ -32,14 +38,24 @@ export class RentalYieldComponent {
     this.calcRentalYield();
   }
 
+  expenseOnChange() {
+    if (!this.expense || this.expense === '$ 0') {
+      this.grossPrefix = 'Gross';
+    } else {
+      this.grossPrefix = 'Net';
+    }
+    this.expenseNumber = this.convertCurrencyToNumber(this.expense);
+    this.calcRentalYield();
+  }
+
   private calcRentalYield() {
     this.outputYieldValue = '-- %';
     if (this.rentNumber > 0 && this.priceNumber > 0) {
       let calculatedYield: number;
       if (this.rentFrequencyValue === 'Week') {
-        calculatedYield = this.rentNumber * 5200 / this.priceNumber;
+        calculatedYield = 100 * (this.rentNumber * 52 - this.expenseNumber) / this.priceNumber;
       } else {
-        calculatedYield = this.rentNumber * 1200 / this.priceNumber;
+        calculatedYield = 100 * (this.rentNumber * 12 - this.expenseNumber) / this.priceNumber;
       }
       if (calculatedYield < 100) {
         this.outputYieldValue = `${calculatedYield.toFixed(2)}%`;
