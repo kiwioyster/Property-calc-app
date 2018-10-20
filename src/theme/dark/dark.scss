@@ -103,8 +103,8 @@ body {
 :root {
   /* generic */
   --gutterSm: 0.3rem;
-  --gutterMd: 0.6rem;
-  --gutterLg: 1.8rem;
+  --gutterMd: 0.4rem;
+  --gutterLg: 1.2rem;
   --gutterXl: 2.4rem;
   --gutterXx: 7.2rem;
   --colorPrimary400: #7cea9c;
@@ -113,9 +113,9 @@ body {
   --fontFamily: "Dosis", sans-serif;
   --fontSizeSm: 1.2rem;
   --fontSizeMd: 1.6rem;
-  --fontSizeLg: 2.1rem;
+  --fontSizeLg: 1.8rem;
   --fontSizeXl: 2.8rem;
-  --fontSizeXx: 4.8rem;
+  --fontSizeXx: 4.6rem;
   --lineHeightSm: 1.1;
   --lineHeightMd: 1.8;
   --transitionDuration: 300ms;
@@ -162,6 +162,7 @@ body {
 
 .Input-text::placeholder {
   color: color($colors, light);
+  font-size: 80%;
 }
 
 .Input-text:focus {
@@ -227,7 +228,7 @@ body {
   flex: 0 50%;
 
   label {
-    padding: 16px 18px;
+    padding: calc(var(--inputPaddingV) * 3.5) calc(var(--inputPaddingH) * 1.2);
     padding-right: 56px;
     width: 100%;
     display: block;
@@ -237,14 +238,14 @@ body {
     z-index: 2;
     transition: color 200ms ease-in;
     overflow: hidden;
-    font-size: 110%;
+    font-size: 95%;
 
-    &[for=radio2] {
+    &.radio2 {
       border-top-right-radius: 0.6rem;
       border-bottom-right-radius: 0.6rem;
     }
 
-    &[for=radio1] {
+    &.radio1 {
       border-top-left-radius: 0.6rem;
       border-bottom-left-radius: 0.6rem;
     }

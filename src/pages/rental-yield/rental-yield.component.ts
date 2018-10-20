@@ -23,7 +23,6 @@ export class RentalYieldComponent {
   }
 
   priceOnChange() {
-    console.log(this.price)
     this.priceNumber = this.convertCurrencyToNumber(this.price);
     this.calcRentalYield();
   }

@@ -8,11 +8,15 @@ import { RentalYieldComponent } from '../pages/rental-yield/rental-yield.compone
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TextMaskModule } from 'angular2-text-mask';
+import { MortgageCostComponent } from '../pages/mortgage-cost/mortgage-cost.component';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @NgModule({
   declarations: [
     MyApp,
-    RentalYieldComponent
+    RentalYieldComponent,
+    MortgageCostComponent,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,9 @@ import { TextMaskModule } from 'angular2-text-mask';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    RentalYieldComponent
+    RentalYieldComponent,
+    MortgageCostComponent,
+    TabsPage
   ],
   providers: [
     StatusBar,

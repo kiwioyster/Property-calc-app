@@ -12,24 +12,24 @@
   </p>
   <div class="radio-wrapper">
     <div class="inputGroup">
-      <input id="radio1" name="radio" type="radio" checked="checked" (change)="rentFrequency('monthly')" />
-      <label for="radio1">Monthly Rent</label>
+      <input id="rental-yield-monthly" name="rental-yield" type="radio" checked="checked" (change)="rentFrequency('monthly')" />
+      <label class="radio1" for="rental-yield-monthly">Monthly Rent</label>
     </div>
     <div class="inputGroup">
-      <input id="radio2" name="radio" type="radio" (change)="rentFrequency('weekly')" />
-      <label for="radio2">Weekly Rent</label>
+      <input id="rental-yield-weekly" name="rental-yield" type="radio" (change)="rentFrequency('weekly')" />
+      <label class="radio2" for="rental-yield-weekly">Weekly Rent</label>
     </div>
   </div>
 
   <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Asset Price" [(ngModel)]="price" (ngModelChange)="priceOnChange()"
-      [textMask]="{mask: currencyMask}" />
-    <label for="input" class="Input-label">Asset Price</label>
+    <input type="tel" class="Input-text" placeholder="Purchase Price" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="price" (ngModelChange)="priceOnChange()" [textMask]="{mask: currencyMask}" />
+    <label for="input" class="Input-label">Purchase Price</label>
   </div>
 
   <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" [(ngModel)]="rent"
-      (ngModelChange)="rentOnChange()" [textMask]="{mask: currencyMask}" />
+    <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="rent" (ngModelChange)="rentOnChange()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
   </div>
 
