@@ -162,7 +162,7 @@ body {
 
 .Input-text::placeholder {
   color: color($colors, light);
-  font-size: 80%;
+  font-size: 85%;
 }
 
 .Input-text:focus {
@@ -238,7 +238,7 @@ body {
     z-index: 2;
     transition: color 200ms ease-in;
     overflow: hidden;
-    font-size: 95%;
+    font-size: 85%;
 
     &.radio2 {
       border-top-right-radius: 0.6rem;
