@@ -43,9 +43,9 @@
   </div>
 
   <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Loan Duration" (keydown.enter)="$event.target.blur()" [(ngModel)]="loanDuration"
-      (ngModelChange)="loanDurationOnChange()" [textMask]="{mask: yearsMask}" />
-    <label for="input" class="Input-label">Loan Duration</label>
+    <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()" [(ngModel)]="loanTerm"
+      (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
+    <label for="input" class="Input-label">Loan Terms</label>
   </div>
 
 </ion-content>

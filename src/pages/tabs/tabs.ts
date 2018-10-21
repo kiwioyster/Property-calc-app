@@ -5,18 +5,9 @@ import { MortgageCostComponent } from '../mortgage-cost/mortgage-cost.component'
 
 @Component({
   templateUrl: 'tabs.html',
-  styles: [`
-  .keyboard-is-open .tabbar {
-    display: none;
-  }`,
-
-    `.keyboard-is-open .scroll-content {
-    margin-bottom: 0 !important;
-  }
-  `]
+  styleUrls: ['tabs.scss']
 })
 export class TabsPage {
-
   tab1Root = RentalYieldComponent;
   tab2Root = MortgageCostComponent;
 
@@ -25,21 +16,19 @@ export class TabsPage {
   }
 
   ionViewDidEnter() {
-    window.addEventListener('keyboardWillShow', this.showListener);
+    window.addEventListener('keyboardDidShow', this.showListener);
     window.addEventListener('keyboardDidHide', this.hideListener);
   }
 
   ionViewWillLeave() {
-    window.removeEventListener('keyboardWillShow', this.showListener);
+    window.removeEventListener('keyboardDidShow', this.showListener);
     window.removeEventListener('keyboardDidHide', this.hideListener);
   }
 
   showListener() {
-    console.log('keyboard visible');
     document.getElementById('TabBarOpen').classList.add('keyboard-is-open');
   }
   hideListener() {
-    console.log('keyboard hides');
     document.getElementById('TabBarOpen').classList.remove('keyboard-is-open');
   }
 }

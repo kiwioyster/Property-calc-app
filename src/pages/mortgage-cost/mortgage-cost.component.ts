@@ -11,7 +11,7 @@ export class MortgageCostComponent {
   downPayment: string;
   price: string;
   interestRate: string;
-  loanDuration: string;
+  loanTerm: string;
 
   downPaymentNumber: number;
   priceNumber: number;
@@ -57,8 +57,8 @@ export class MortgageCostComponent {
     this.calcRentalYield();
   }
 
-  loanDurationOnChange() {
-    this.numberOfMonthlyPayments = this.convertDurationTonumberOfMonthlyPayments(this.loanDuration);
+  loanTermOnChange() {
+    this.numberOfMonthlyPayments = this.convertDurationTonumberOfMonthlyPayments(this.loanTerm);
     this.calcRentalYield();
   }
 
