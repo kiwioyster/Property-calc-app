@@ -104,12 +104,6 @@ body {
   /* generic */
   --gutterMd: 0.3rem;
   --gutterLg: 1.2rem;
-  --gutterXl: 2.4rem;
-  --gutterXx: 7.2rem;
-  --colorPrimary400: #7cea9c;
-  --colorPrimary600: #71d58e;
-  --colorPrimary800: #66c080;
-  --fontFamily: "Dosis", sans-serif;
   --fontSizeSm: 1.2rem;
   --fontSizeMd: 1.6rem;
   --fontSizeLg: 1.8rem;
@@ -230,7 +224,9 @@ body {
     padding: calc(var(--inputPaddingV) * 4.5) calc(var(--inputPaddingH) * 1.2);
     padding-right: 48px;
     width: 100%;
-    display: block;
+    height: 100%;
+    align-items: center;
+    display: flex;
     text-align: left;
     color: $subdued-text-color;
     position: relative;
@@ -250,8 +246,8 @@ body {
     }
 
     &:before {
-      width: 12px;
-      height: 12px;
+      width: 24px;
+      height: 24px;
       content: '';
       position: absolute;
       background-color: color($colors, secondary);
