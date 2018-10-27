@@ -124,6 +124,7 @@ body {
   --labelTransformedPosY: calc((var(--labelDefaultPosY)) - (var(--inputPaddingV) * var(--labelScaleFactor)) - (var(--inputFontSize) * var(--inputLineHeight)));
   --inputTransitionDuration: var(--transitionDuration);
   --inputTransitionTF: var(--transitionTF);
+  --inputMargin: 34px;
 }
 
 *,
@@ -132,9 +133,22 @@ body {
   box-sizing: border-box;
 }
 
+.flex-input-wrapper {
+  display: flex;
+
+  &>.Input {
+    width: 50%;
+
+    &:first-child {
+      margin-right: var(--gutterMd);
+      flex-grow: 1;
+    }
+  }
+}
+
 .Input {
   position: relative;
-  margin-bottom: 34px;
+  margin-bottom: var(--inputMargin);
 }
 
 .Input-text {
@@ -182,6 +196,7 @@ body {
     transform var(--inputTransitionDuration) var(--inputTransitionTF),
     visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
     z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
+  white-space: nowrap;
 }
 
 .Input-text:placeholder-shown+.Input-label {
@@ -309,7 +324,7 @@ body {
 
 .radio-wrapper {
   background-color: white;
-  margin: 12px 0 34px 0;
+  margin: 12px 0 var(--inputMargin) 0;
   display: flex;
   border-radius: 0.6rem;
 }

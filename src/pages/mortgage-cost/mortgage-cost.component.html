@@ -30,10 +30,17 @@
     <label for="input" class="Input-label">Purchase Price</label>
   </div>
 
-  <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Down Payment" (keydown.enter)="$event.target.blur()" [(ngModel)]="downPayment"
-      (ngModelChange)="downPaymentOnChange()" [textMask]="{mask: currencyMask}" />
-    <label for="input" class="Input-label">Down Payment</label>
+  <div class="flex-input-wrapper">
+    <div class="Input">
+      <input type="tel" class="Input-text" placeholder="Down Payment" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" [textMask]="{mask: currencyMask}" />
+      <label for="input" class="Input-label">Down Payment</label>
+    </div>
+
+    <div class="Input">
+      <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()" [(ngModel)]="downPaymentPercent"
+        (ngModelChange)="downPaymentPercentOnChange()" [textMask]="{mask: percentageMask}" />
+    </div>
   </div>
 
   <div class="Input">
