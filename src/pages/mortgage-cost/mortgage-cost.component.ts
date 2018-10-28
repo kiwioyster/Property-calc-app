@@ -21,6 +21,7 @@ export class MortgageCostComponent {
   numberOfMonthlyPayments: number;
 
   paymentFrequency = 'monthly';
+  lastChangedDownPayment = 'price';
 
   calculatePaymentValue: number;
   currencyMask = createNumberMask({
@@ -44,33 +45,39 @@ export class MortgageCostComponent {
 
   }
 
+  paymentFrequencyChange(value: string) {
+    this.paymentFrequency = value;
+    this.calcRentalYield();
+  }
+
   priceOnChange() {
     this.priceNumber = this.convertCurrencyToNumber(this.price);
-    if (this.downPaymentPercentNumber >= 0) {
-      this.downPaymentNumber = Math.floor(this.downPaymentPercentNumber * this.priceNumber);
-      this.downPayment = `$ ${this.downPaymentNumber}`;
+    if (this.lastChangedDownPayment === 'percent' && this.downPaymentPercentNumber >= 0) {
+      this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
+    } else if (this.lastChangedDownPayment === 'price' && this.priceNumber > 0) {
+      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
     }
     this.calcRentalYield();
   }
 
   downPaymentOnChange() {
+    this.lastChangedDownPayment = 'price';
     this.downPaymentNumber = this.convertCurrencyToNumber(this.downPayment);
     if (this.priceNumber > 0) {
-      this.downPaymentPercentNumber = Math.floor(this.downPaymentNumber * 100 / this.priceNumber);
-      this.downPaymentPercent = `${this.downPaymentPercentNumber} %`
+      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
     }
     this.calcRentalYield();
   }
 
   downPaymentPercentOnChange() {
+    this.lastChangedDownPayment = 'percent';
     this.downPaymentPercentNumber = this.convertPercentageToNumber(this.downPaymentPercent);
-    this.downPaymentNumber = Math.floor(this.downPaymentPercentNumber * this.priceNumber);
-    this.downPayment = `$ ${this.downPaymentNumber}`;
+    this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
     this.calcRentalYield();
   }
 
   interestRateOnChange() {
-    this.interestRateNumberPerMonth = this.convertPercentageToNumber(this.interestRate) / 12;
+    this.interestRateNumberPerMonth = this.convertPercentageToNumber(this.interestRate) / 1200;
     this.calcRentalYield();
   }
 
@@ -109,16 +116,21 @@ export class MortgageCostComponent {
   }
 
   private convertPercentageToNumber(percentage: string): number {
-    return Number(percentage.replace('%', '')) / 100;
+    return Number(percentage.replace('%', ''));
   }
 
   private convertDurationToNumberOfMonthlyPayments(duration: string): number {
     return Number(duration.replace('Years', '')) * 12;
   }
 
-  paymentFrequencyChange(value: string) {
-    this.paymentFrequency = value;
-    this.calcRentalYield();
+  private updateDownPaymentValue(downPaymentPercentNumber, priceNumber): void {
+    this.downPaymentNumber = Math.round(downPaymentPercentNumber * priceNumber / 100);
+    this.downPayment = `$ ${this.downPaymentNumber}`;
+  }
+
+  private updateDownPaymentPercentValue(downPaymentNumber, priceNumber): void {
+    this.downPaymentPercentNumber = Math.round(downPaymentNumber * 100 / priceNumber);
+    this.downPaymentPercent = `${this.downPaymentPercentNumber} %`
   }
 
 }

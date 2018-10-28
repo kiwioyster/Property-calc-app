@@ -1,7 +1,9 @@
-.keyboard-is-open .tabbar {
-  display: none;
-}
+tabs {
+  .keyboard-is-open .tabbar {
+    display: none;
+  }
 
-.keyboard-is-open .scroll-content {
-  margin-bottom: 0 !important;
+  .keyboard-is-open .scroll-content {
+    margin-bottom: 0 !important;
+  }
 }

@@ -4,8 +4,8 @@ import { RentalYieldComponent } from '../rental-yield/rental-yield.component';
 import { MortgageCostComponent } from '../mortgage-cost/mortgage-cost.component';
 
 @Component({
-  templateUrl: 'tabs.html',
-  styleUrls: ['tabs.scss']
+  selector: 'tabs',
+  templateUrl: 'tabs.html'
 })
 export class TabsPage {
   tab1Root = RentalYieldComponent;
