@@ -9,26 +9,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MortgageCostComponent } from '../pages/mortgage-cost/mortgage-cost.component';
-import { TabsPage } from '../pages/tabs/tabs';
+import { MainPage } from '../pages/main/main.component';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    RentalYieldComponent,
-    MortgageCostComponent,
-    TabsPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    TextMaskModule
-  ],
+  declarations: [MyApp, RentalYieldComponent, MortgageCostComponent, MainPage],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), TextMaskModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     RentalYieldComponent,
     MortgageCostComponent,
-    TabsPage
+    MainPage
   ],
   providers: [
     StatusBar,
@@ -36,4 +27,4 @@ import { TabsPage } from '../pages/tabs/tabs';
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
       Mortgage Cost
     </ion-title>
@@ -15,7 +18,8 @@
   </p>
   <div class="radio-wrapper">
     <div class="inputGroup">
-      <input id="mortgage-cost-monthly" name="mortgage-cost" type="radio" checked="checked" (change)="paymentFrequencyChange('monthly')" />
+      <input id="mortgage-cost-monthly" name="mortgage-cost" type="radio" checked="checked"
+        (change)="paymentFrequencyChange('monthly')" />
       <label class="radio1" for="mortgage-cost-monthly">Monthly Payment</label>
     </div>
     <div class="inputGroup">
@@ -38,8 +42,9 @@
     </div>
 
     <div class="Input">
-      <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()" [(ngModel)]="downPaymentPercent"
-        (ngModelChange)="downPaymentPercentOnChange()" [textMask]="{mask: percentageMask}" />
+      <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()"
+        [textMask]="{mask: percentageMask}" />
     </div>
   </div>
 
@@ -50,8 +55,8 @@
   </div>
 
   <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()" [(ngModel)]="loanTerm"
-      (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
+    <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
     <label for="input" class="Input-label">Loan Terms</label>
   </div>
 

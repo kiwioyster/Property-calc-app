@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
       {{grossPrefix}} Yield per Annum
     </ion-title>
@@ -12,7 +15,8 @@
   </p>
   <div class="radio-wrapper">
     <div class="inputGroup">
-      <input id="rental-yield-monthly" name="rental-yield" type="radio" checked="checked" (change)="rentFrequency('monthly')" />
+      <input id="rental-yield-monthly" name="rental-yield" type="radio" checked="checked"
+        (change)="rentFrequency('monthly')" />
       <label class="radio1" for="rental-yield-monthly">Monthly Rent</label>
     </div>
     <div class="inputGroup">
@@ -28,8 +32,9 @@
   </div>
 
   <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="rent" (ngModelChange)="rentOnChange()" [textMask]="{mask: currencyMask}" />
+    <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}"
+      (keydown.enter)="$event.target.blur()" [(ngModel)]="rent" (ngModelChange)="rentOnChange()"
+      [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
   </div>
 
