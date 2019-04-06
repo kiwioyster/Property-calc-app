@@ -329,4 +329,9 @@ body {
   border-radius: 0.6rem;
 }
 
+ion-title {
+  margin-right: 56px;
+  text-align: center;
+}
+
 @import "./dark.platforms.scss"

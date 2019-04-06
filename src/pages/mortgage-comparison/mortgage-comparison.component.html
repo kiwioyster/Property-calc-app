@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Mortgage Comparison
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="Title" *ngIf="!calculatePaymentValue">
+    $ --
+  </p>
+  <p class="Title" *ngIf="calculatePaymentValue">
+    {{calculatePaymentValue | currency:'$ ':'code':'1.0-0'}}
+  </p>
+  <div class="radio-wrapper">
+    <div class="inputGroup">
+      <input id="mortgage-cost-monthly" name="mortgage-cost" type="radio" checked="checked"
+        (change)="paymentFrequencyChange('monthly')" />
+      <label class="radio1" for="mortgage-cost-monthly">Monthly Payment</label>
+    </div>
+    <div class="inputGroup">
+      <input id="mortgage-cost-weekly" name="mortgage-cost" type="radio" (change)="paymentFrequencyChange('weekly')" />
+      <label class="radio2" for="mortgage-cost-weekly">Weekly Payment</label>
+    </div>
+  </div>
+
+  <div class="Input">
+    <input type="tel" class="Input-text" placeholder="Purchase Price" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="price" (ngModelChange)="priceOnChange()" [textMask]="{mask: currencyMask}" />
+    <label for="input" class="Input-label">Purchase Price</label>
+  </div>
+
+  <div class="flex-input-wrapper">
+    <div class="Input">
+      <input type="tel" class="Input-text" placeholder="Down Payment" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" [textMask]="{mask: currencyMask}" />
+      <label for="input" class="Input-label">Down Payment</label>
+    </div>
+
+    <div class="Input">
+      <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()"
+        [textMask]="{mask: percentageMask}" />
+    </div>
+  </div>
+
+  <div class="Input">
+    <input type="tel" class="Input-text" placeholder="Annual Interest Rate" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="interestRate" (ngModelChange)="interestRateOnChange()" [textMask]="{mask: percentageMask}" />
+    <label for="input" class="Input-label">Annual Interest Rate</label>
+  </div>
+
+  <div class="Input">
+    <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()"
+      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
+    <label for="input" class="Input-label">Loan Terms</label>
+  </div>
+
+</ion-content>

@@ -9,15 +9,14 @@ import { MortgageCostComponent } from '../mortgage-cost/mortgage-cost.component'
 })
 export class MainPage {
   private rootPage;
-  private homePage;
-  private catsPage;
-  private dogsPage;
+  private rentalYieldPage;
+  private mortgageCostPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.rootPage = RentalYieldComponent;
-    this.homePage = RentalYieldComponent;
+    this.rentalYieldPage = RentalYieldComponent;
 
-    this.dogsPage = MortgageCostComponent;
+    this.mortgageCostPage = MortgageCostComponent;
   }
 
   ionViewDidLoad() {
