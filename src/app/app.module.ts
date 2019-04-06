@@ -11,6 +11,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { MortgageCostComponent } from '../pages/mortgage-cost/mortgage-cost.component';
 import { MainPage } from '../pages/main/main.component';
 import { MortgageComparisonComponent } from '../pages/mortgage-comparison/mortgage-comparison.component';
+import { MortgageInterestOnlyComponent } from '../pages/mortgage-interest-only/mortgage-interest-only.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MortgageComparisonComponent } from '../pages/mortgage-comparison/mortga
     RentalYieldComponent,
     MortgageCostComponent,
     MortgageComparisonComponent,
+    MortgageInterestOnlyComponent,
     MainPage
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), TextMaskModule],
@@ -27,6 +29,7 @@ import { MortgageComparisonComponent } from '../pages/mortgage-comparison/mortga
     RentalYieldComponent,
     MortgageCostComponent,
     MortgageComparisonComponent,
+    MortgageInterestOnlyComponent,
     MainPage
   ],
   providers: [
