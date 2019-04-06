@@ -10,15 +10,23 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MortgageCostComponent } from '../pages/mortgage-cost/mortgage-cost.component';
 import { MainPage } from '../pages/main/main.component';
+import { MortgageComparisonComponent } from '../pages/mortgage-comparison/mortgage-comparison.component';
 
 @NgModule({
-  declarations: [MyApp, RentalYieldComponent, MortgageCostComponent, MainPage],
+  declarations: [
+    MyApp,
+    RentalYieldComponent,
+    MortgageCostComponent,
+    MortgageComparisonComponent,
+    MainPage
+  ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), TextMaskModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     RentalYieldComponent,
     MortgageCostComponent,
+    MortgageComparisonComponent,
     MainPage
   ],
   providers: [

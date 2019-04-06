@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
-  selector: 'mortgage-cost-component',
-  templateUrl: 'mortgage-cost.component.html'
+  selector: 'mortgage-comparison-component',
+  templateUrl: 'mortgage-comparison.component.html'
 })
-export class MortgageCostComponent {
-
+export class MortgageComparisonComponent {
   downPayment: string;
   downPaymentPercent: string;
   price: string;
-  interestRate: string;
+  interestRateOne: string;
+  interestRateTwo: string;
   loanTerm: string;
 
   downPaymentNumber: number;
   downPaymentPercentNumber: number;
   priceNumber: number;
-  interestRateNumberPerMonth: number;
+  interestRateOneNumberPerMonth: number;
+  interestRateTwoNumberPerMonth: number;
   numberOfMonthlyPayments: number;
 
   paymentFrequency = 'monthly';
@@ -33,17 +34,15 @@ export class MortgageCostComponent {
     prefix: '',
     suffix: ' %',
     allowDecimal: true
-  })
+  });
 
   yearsMask = createNumberMask({
     prefix: '',
     suffix: ' Years',
     allowDecimal: true
-  })
+  });
 
-  constructor(public navCtrl: NavController) {
-
-  }
+  constructor(public navCtrl: NavController) {}
 
   paymentFrequencyChange(value: string) {
     this.paymentFrequency = value;
@@ -52,10 +51,22 @@ export class MortgageCostComponent {
 
   priceOnChange() {
     this.priceNumber = this.convertCurrencyToNumber(this.price);
-    if (this.lastChangedDownPayment === 'percent' && this.downPaymentPercentNumber >= 0) {
-      this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
-    } else if (this.lastChangedDownPayment === 'price' && this.priceNumber > 0) {
-      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
+    if (
+      this.lastChangedDownPayment === 'percent' &&
+      this.downPaymentPercentNumber >= 0
+    ) {
+      this.updateDownPaymentValue(
+        this.downPaymentPercentNumber,
+        this.priceNumber
+      );
+    } else if (
+      this.lastChangedDownPayment === 'price' &&
+      this.priceNumber > 0
+    ) {
+      this.updateDownPaymentPercentValue(
+        this.downPaymentNumber,
+        this.priceNumber
+      );
     }
     this.calcRentalYield();
   }
@@ -64,48 +75,79 @@ export class MortgageCostComponent {
     this.lastChangedDownPayment = 'price';
     this.downPaymentNumber = this.convertCurrencyToNumber(this.downPayment);
     if (this.priceNumber > 0) {
-      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
+      this.updateDownPaymentPercentValue(
+        this.downPaymentNumber,
+        this.priceNumber
+      );
     }
     this.calcRentalYield();
   }
 
   downPaymentPercentOnChange() {
     this.lastChangedDownPayment = 'percent';
-    this.downPaymentPercentNumber = this.convertPercentageToNumber(this.downPaymentPercent);
-    this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
+    this.downPaymentPercentNumber = this.convertPercentageToNumber(
+      this.downPaymentPercent
+    );
+    this.updateDownPaymentValue(
+      this.downPaymentPercentNumber,
+      this.priceNumber
+    );
     this.calcRentalYield();
   }
 
-  interestRateOnChange() {
-    this.interestRateNumberPerMonth = this.convertPercentageToNumber(this.interestRate) / 1200;
+  interestRateOneOnChange() {
+    this.interestRateOneNumberPerMonth =
+      this.convertPercentageToNumber(this.interestRateOne) / 1200;
+    this.calcRentalYield();
+  }
+
+  interestRateTwoOnChange() {
+    this.interestRateTwoNumberPerMonth =
+      this.convertPercentageToNumber(this.interestRateTwo) / 1200;
     this.calcRentalYield();
   }
 
   loanTermOnChange() {
-    this.numberOfMonthlyPayments = this.convertDurationToNumberOfMonthlyPayments(this.loanTerm);
+    this.numberOfMonthlyPayments = this.convertDurationToNumberOfMonthlyPayments(
+      this.loanTerm
+    );
     this.calcRentalYield();
   }
 
   private calcRentalYield() {
     this.calculatePaymentValue = undefined;
-    if (this.priceNumber > 0 &&
+    if (
+      this.priceNumber > 0 &&
       this.downPaymentNumber >= 0 &&
       this.downPaymentNumber <= this.priceNumber &&
-      this.interestRateNumberPerMonth > 0 &&
-      this.numberOfMonthlyPayments > 0) {
-
+      this.interestRateOneNumberPerMonth > 0 &&
+      this.interestRateTwoNumberPerMonth > 0 &&
+      this.numberOfMonthlyPayments > 0
+    ) {
       const p = this.priceNumber - this.downPaymentNumber;
-      const r = this.interestRateNumberPerMonth;
-      const n = this.numberOfMonthlyPayments
-      const a = Math.pow(1 + r, n);
+      const rOne = this.interestRateOneNumberPerMonth;
+      const rTwo = this.interestRateTwoNumberPerMonth;
+      const n = this.numberOfMonthlyPayments;
+      const aOne = Math.pow(1 + rOne, n);
+      const aTwo = Math.pow(1 + rTwo, n);
 
-      const calculatedPayment = p * (r * a) / (a - 1);
+      const calculatedPaymentOne = (p * (rOne * aOne)) / (aOne - 1);
+      const calculatedPaymentTwo = (p * (rTwo * aTwo)) / (aTwo - 1);
 
-      if (calculatedPayment > 0 && calculatedPayment <= p) {
+      if (
+        calculatedPaymentOne > 0 &&
+        calculatedPaymentOne <= p &&
+        calculatedPaymentTwo > 0 &&
+        calculatedPaymentTwo <= p
+      ) {
         if (this.paymentFrequency === 'monthly') {
-          this.calculatePaymentValue = Math.round(calculatedPayment);
+          this.calculatePaymentValue = Math.abs(
+            Math.round(calculatedPaymentOne - calculatedPaymentTwo)
+          );
         } else if (this.paymentFrequency === 'weekly') {
-          this.calculatePaymentValue = Math.round(calculatedPayment * 0.23077);
+          this.calculatePaymentValue = Math.abs(
+            Math.round((calculatedPaymentOne - calculatedPaymentTwo) * 0.23077)
+          );
         }
       }
     }
@@ -124,13 +166,16 @@ export class MortgageCostComponent {
   }
 
   private updateDownPaymentValue(downPaymentPercentNumber, priceNumber): void {
-    this.downPaymentNumber = Math.round(downPaymentPercentNumber * priceNumber / 100);
+    this.downPaymentNumber = Math.round(
+      (downPaymentPercentNumber * priceNumber) / 100
+    );
     this.downPayment = `$ ${this.downPaymentNumber}`;
   }
 
   private updateDownPaymentPercentValue(downPaymentNumber, priceNumber): void {
-    this.downPaymentPercentNumber = Math.round(downPaymentNumber * 100 / priceNumber);
-    this.downPaymentPercent = `${this.downPaymentPercentNumber} %`
+    this.downPaymentPercentNumber = Math.round(
+      (downPaymentNumber * 100) / priceNumber
+    );
+    this.downPaymentPercent = `${this.downPaymentPercentNumber} %`;
   }
-
 }

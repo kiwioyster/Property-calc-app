@@ -13,9 +13,34 @@
   <p class="Title" *ngIf="!calculatePaymentValue">
     $ --
   </p>
-  <p class="Title" *ngIf="calculatePaymentValue">
-    {{calculatePaymentValue | currency:'$ ':'code':'1.0-0'}}
-  </p>
+  <div *ngIf="calculatePaymentValue">
+    <p class="Title title-pre-text" *ngIf="interestRateOne > interestRateTwo">
+      Option 2 is cheaper by
+    </p>
+    <p class="Title title-pre-text" *ngIf="interestRateOne < interestRateTwo">
+      Option 1 is cheaper by
+    </p>
+    <p class="Title">
+      {{calculatePaymentValue | currency:'$ ':'code':'1.0-0'}}
+    </p>
+  </div>
+
+
+
+  <div class="flex-input-wrapper">
+    <div class="Input top-input">
+      <input type="tel" class="Input-text" placeholder="Interest Option 1" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="interestRateOne" (ngModelChange)="interestRateOneOnChange()" [textMask]="{mask: percentageMask}" />
+      <label for="input" class="Input-label">Interest Option 1</label>
+    </div>
+
+    <div class="Input top-input">
+      <input type="tel" class="Input-text" placeholder="Interest Option 2" (keydown.enter)="$event.target.blur()"
+        [(ngModel)]="interestRateTwo" (ngModelChange)="interestRateTwoOnChange()" [textMask]="{mask: percentageMask}" />
+      <label for="input" class="Input-label">Interest Option 2</label>
+    </div>
+  </div>
+
   <div class="radio-wrapper">
     <div class="inputGroup">
       <input id="mortgage-cost-monthly" name="mortgage-cost" type="radio" checked="checked"
@@ -46,12 +71,6 @@
         [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()"
         [textMask]="{mask: percentageMask}" />
     </div>
-  </div>
-
-  <div class="Input">
-    <input type="tel" class="Input-text" placeholder="Annual Interest Rate" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="interestRate" (ngModelChange)="interestRateOnChange()" [textMask]="{mask: percentageMask}" />
-    <label for="input" class="Input-label">Annual Interest Rate</label>
   </div>
 
   <div class="Input">

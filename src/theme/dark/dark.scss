@@ -330,8 +330,26 @@ body {
 }
 
 ion-title {
-  margin-right: 56px;
+  margin-right: 58px;
   text-align: center;
+
+  >.toolbar-title {
+    overflow: visible;
+  }
+}
+
+.top-input {
+  margin-bottom: 20px;
+  margin-top: 24px;
+}
+
+.title-pre-text {
+  font-size: var(--fontSizeMd);
+  margin-bottom: 8px
+}
+
+ion-icon {
+  min-width: 20px;
 }
 
 @import "./dark.platforms.scss"
