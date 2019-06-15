@@ -30,33 +30,36 @@
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Purchase Price" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="price" (ngModelChange)="priceOnChange()" [textMask]="{mask: currencyMask}" />
+      [(ngModel)]="price" (ngModelChange)="priceOnChange()" (blur)="inputOnBlur()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Purchase Price</label>
   </div>
 
   <div class="flex-input-wrapper">
     <div class="Input">
       <input type="tel" class="Input-text" placeholder="Down Payment" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" [textMask]="{mask: currencyMask}" />
+        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" (blur)="inputOnBlur()"
+        [textMask]="{mask: currencyMask}" />
       <label for="input" class="Input-label">Down Payment</label>
     </div>
 
     <div class="Input">
       <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()"
+        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()" (blur)="inputOnBlur()"
         [textMask]="{mask: percentageMask}" />
     </div>
   </div>
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Annual Interest Rate" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="interestRate" (ngModelChange)="interestRateOnChange()" [textMask]="{mask: percentageMask}" />
+      [(ngModel)]="interestRate" (ngModelChange)="interestRateOnChange()" (blur)="inputOnBlur()"
+      [textMask]="{mask: percentageMask}" />
     <label for="input" class="Input-label">Annual Interest Rate</label>
   </div>
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
+      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" (blur)="inputOnBlur()"
+      [textMask]="{mask: yearsMask}" />
     <label for="input" class="Input-label">Loan Terms</label>
   </div>
 

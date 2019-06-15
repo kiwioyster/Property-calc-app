@@ -30,13 +30,15 @@
   <div class="flex-input-wrapper">
     <div class="Input top-input">
       <input type="tel" class="Input-text" placeholder="Interest Option 1" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="interestRateOne" (ngModelChange)="interestRateOneOnChange()" [textMask]="{mask: percentageMask}" />
+        [(ngModel)]="interestRateOne" (ngModelChange)="interestRateOneOnChange()" (blur)="inputOnBlur()"
+        [textMask]="{mask: percentageMask}" />
       <label for="input" class="Input-label">Interest Option 1</label>
     </div>
 
     <div class="Input top-input">
       <input type="tel" class="Input-text" placeholder="Interest Option 2" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="interestRateTwo" (ngModelChange)="interestRateTwoOnChange()" [textMask]="{mask: percentageMask}" />
+        [(ngModel)]="interestRateTwo" (ngModelChange)="interestRateTwoOnChange()" (blur)="inputOnBlur()"
+        [textMask]="{mask: percentageMask}" />
       <label for="input" class="Input-label">Interest Option 2</label>
     </div>
   </div>
@@ -55,27 +57,29 @@
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Purchase Price" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="price" (ngModelChange)="priceOnChange()" [textMask]="{mask: currencyMask}" />
+      [(ngModel)]="price" (ngModelChange)="priceOnChange()" (blur)="inputOnBlur()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Purchase Price</label>
   </div>
 
   <div class="flex-input-wrapper">
     <div class="Input">
       <input type="tel" class="Input-text" placeholder="Down Payment" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" [textMask]="{mask: currencyMask}" />
+        [(ngModel)]="downPayment" (ngModelChange)="downPaymentOnChange()" (blur)="inputOnBlur()"
+        [textMask]="{mask: currencyMask}" />
       <label for="input" class="Input-label">Down Payment</label>
     </div>
 
     <div class="Input">
       <input type="tel" class="Input-text" placeholder="%" (keydown.enter)="$event.target.blur()"
-        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()"
+        [(ngModel)]="downPaymentPercent" (ngModelChange)="downPaymentPercentOnChange()" (blur)="inputOnBlur()"
         [textMask]="{mask: percentageMask}" />
     </div>
   </div>
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Loan Terms" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" [textMask]="{mask: yearsMask}" />
+      [(ngModel)]="loanTerm" (ngModelChange)="loanTermOnChange()" (blur)="inputOnBlur()"
+      [textMask]="{mask: yearsMask}" />
     <label for="input" class="Input-label">Loan Terms</label>
   </div>
 

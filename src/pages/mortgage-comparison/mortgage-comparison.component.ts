@@ -27,19 +27,24 @@ export class MortgageComparisonComponent {
   calculatePaymentValue: number;
   currencyMask = createNumberMask({
     prefix: '$ ',
-    includeThousandsSeparator: true
+    includeThousandsSeparator: true,
+    allowLeadingZeroes: true
   });
 
   percentageMask = createNumberMask({
     prefix: '',
     suffix: ' %',
-    allowDecimal: true
+    allowDecimal: true,
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true
   });
 
   yearsMask = createNumberMask({
     prefix: '',
     suffix: ' Years',
-    allowDecimal: true
+    allowDecimal: true,
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true
   });
 
   constructor(public navCtrl: NavController) {}
@@ -112,6 +117,31 @@ export class MortgageComparisonComponent {
       this.loanTerm
     );
     this.calcRentalYield();
+  }
+
+  inputOnBlur() {
+    if (typeof this.priceNumber === 'number') {
+      this.price = this.priceNumber.toString();
+    }
+    if (typeof this.downPaymentNumber === 'number') {
+      this.downPayment = this.downPaymentNumber.toString();
+    }
+    if (typeof this.downPaymentPercentNumber === 'number') {
+      this.downPaymentPercent = this.downPaymentPercentNumber.toString();
+    }
+    if (typeof this.interestRateOneNumberPerMonth === 'number') {
+      this.interestRateOne = (
+        this.interestRateOneNumberPerMonth * 1200
+      ).toString();
+    }
+    if (typeof this.interestRateTwoNumberPerMonth === 'number') {
+      this.interestRateTwo = (
+        this.interestRateTwoNumberPerMonth * 1200
+      ).toString();
+    }
+    if (typeof this.numberOfMonthlyPayments === 'number') {
+      this.loanTerm = (this.numberOfMonthlyPayments / 12).toString();
+    }
   }
 
   private calcRentalYield() {

@@ -27,20 +27,21 @@
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Purchase Price" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="price" (ngModelChange)="priceOnChange()" [textMask]="{mask: currencyMask}" />
+      [(ngModel)]="price" (ngModelChange)="priceOnChange()" (blur)="inputOnBlur()" [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Purchase Price</label>
   </div>
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Rent per {{rentFrequencyValue}}"
-      (keydown.enter)="$event.target.blur()" [(ngModel)]="rent" (ngModelChange)="rentOnChange()"
+      (keydown.enter)="$event.target.blur()" [(ngModel)]="rent" (ngModelChange)="rentOnChange()" (blur)="inputOnBlur()"
       [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Rent per {{rentFrequencyValue}}</label>
   </div>
 
   <div class="Input">
     <input type="tel" class="Input-text" placeholder="Annual Expense (optional)" (keydown.enter)="$event.target.blur()"
-      [(ngModel)]="expense" (ngModelChange)="expenseOnChange()" [textMask]="{mask: currencyMask}" />
+      [(ngModel)]="expense" (ngModelChange)="expenseOnChange()" (blur)="inputOnBlur()"
+      [textMask]="{mask: currencyMask}" />
     <label for="input" class="Input-label">Annual Expense</label>
   </div>
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'rental-yield-component',
@@ -21,12 +21,11 @@ export class RentalYieldComponent {
   rentFrequencyValue = 'Month';
   currencyMask = createNumberMask({
     prefix: '$ ',
-    includeThousandsSeparator: true
-  })
+    includeThousandsSeparator: true,
+    allowLeadingZeroes: true
+  });
 
-  constructor(public navCtrl: NavController) {
-
-  }
+  constructor(public navCtrl: NavController) {}
 
   priceOnChange() {
     this.priceNumber = this.convertCurrencyToNumber(this.price);
@@ -48,14 +47,30 @@ export class RentalYieldComponent {
     this.calcRentalYield();
   }
 
+  inputOnBlur() {
+    if (typeof this.priceNumber === 'number') {
+      this.price = this.priceNumber.toString();
+    }
+    if (typeof this.rentNumber === 'number') {
+      this.rent = this.rentNumber.toString();
+    }
+    if (typeof this.expenseNumber === 'number') {
+      this.expense = this.expenseNumber.toString();
+    }
+  }
+
   private calcRentalYield() {
     this.outputYieldValue = '-- %';
     if (this.rentNumber > 0 && this.priceNumber > 0) {
       let calculatedYield: number;
       if (this.rentFrequencyValue === 'Week') {
-        calculatedYield = 100 * (this.rentNumber * 52 - this.expenseNumber) / this.priceNumber;
+        calculatedYield =
+          (100 * (this.rentNumber * 52 - this.expenseNumber)) /
+          this.priceNumber;
       } else {
-        calculatedYield = 100 * (this.rentNumber * 12 - this.expenseNumber) / this.priceNumber;
+        calculatedYield =
+          (100 * (this.rentNumber * 12 - this.expenseNumber)) /
+          this.priceNumber;
       }
       if (calculatedYield < 100) {
         this.outputYieldValue = `${calculatedYield.toFixed(2)}%`;

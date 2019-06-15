@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'mortgage-cost-component',
   templateUrl: 'mortgage-cost.component.html'
 })
 export class MortgageCostComponent {
-
   downPayment: string;
   downPaymentPercent: string;
   price: string;
@@ -26,24 +25,27 @@ export class MortgageCostComponent {
   calculatePaymentValue: number;
   currencyMask = createNumberMask({
     prefix: '$ ',
-    includeThousandsSeparator: true
+    includeThousandsSeparator: true,
+    allowLeadingZeroes: true
   });
 
   percentageMask = createNumberMask({
     prefix: '',
     suffix: ' %',
-    allowDecimal: true
-  })
+    allowDecimal: true,
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true
+  });
 
   yearsMask = createNumberMask({
     prefix: '',
     suffix: ' Years',
-    allowDecimal: true
-  })
+    allowDecimal: true,
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true
+  });
 
-  constructor(public navCtrl: NavController) {
-
-  }
+  constructor(public navCtrl: NavController) {}
 
   paymentFrequencyChange(value: string) {
     this.paymentFrequency = value;
@@ -52,10 +54,22 @@ export class MortgageCostComponent {
 
   priceOnChange() {
     this.priceNumber = this.convertCurrencyToNumber(this.price);
-    if (this.lastChangedDownPayment === 'percent' && this.downPaymentPercentNumber >= 0) {
-      this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
-    } else if (this.lastChangedDownPayment === 'price' && this.priceNumber > 0) {
-      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
+    if (
+      this.lastChangedDownPayment === 'percent' &&
+      this.downPaymentPercentNumber >= 0
+    ) {
+      this.updateDownPaymentValue(
+        this.downPaymentPercentNumber,
+        this.priceNumber
+      );
+    } else if (
+      this.lastChangedDownPayment === 'price' &&
+      this.priceNumber > 0
+    ) {
+      this.updateDownPaymentPercentValue(
+        this.downPaymentNumber,
+        this.priceNumber
+      );
     }
     this.calcRentalYield();
   }
@@ -64,42 +78,72 @@ export class MortgageCostComponent {
     this.lastChangedDownPayment = 'price';
     this.downPaymentNumber = this.convertCurrencyToNumber(this.downPayment);
     if (this.priceNumber > 0) {
-      this.updateDownPaymentPercentValue(this.downPaymentNumber, this.priceNumber);
+      this.updateDownPaymentPercentValue(
+        this.downPaymentNumber,
+        this.priceNumber
+      );
     }
     this.calcRentalYield();
   }
 
   downPaymentPercentOnChange() {
     this.lastChangedDownPayment = 'percent';
-    this.downPaymentPercentNumber = this.convertPercentageToNumber(this.downPaymentPercent);
-    this.updateDownPaymentValue(this.downPaymentPercentNumber, this.priceNumber);
+    this.downPaymentPercentNumber = this.convertPercentageToNumber(
+      this.downPaymentPercent
+    );
+    this.updateDownPaymentValue(
+      this.downPaymentPercentNumber,
+      this.priceNumber
+    );
     this.calcRentalYield();
   }
 
   interestRateOnChange() {
-    this.interestRateNumberPerMonth = this.convertPercentageToNumber(this.interestRate) / 1200;
+    this.interestRateNumberPerMonth =
+      this.convertPercentageToNumber(this.interestRate) / 1200;
     this.calcRentalYield();
   }
 
   loanTermOnChange() {
-    this.numberOfMonthlyPayments = this.convertDurationToNumberOfMonthlyPayments(this.loanTerm);
+    this.numberOfMonthlyPayments = this.convertDurationToNumberOfMonthlyPayments(
+      this.loanTerm
+    );
     this.calcRentalYield();
+  }
+
+  inputOnBlur() {
+    if (typeof this.priceNumber === 'number') {
+      this.price = this.priceNumber.toString();
+    }
+    if (typeof this.downPaymentNumber === 'number') {
+      this.downPayment = this.downPaymentNumber.toString();
+    }
+    if (typeof this.downPaymentPercentNumber === 'number') {
+      this.downPaymentPercent = this.downPaymentPercentNumber.toString();
+    }
+    if (typeof this.interestRateNumberPerMonth === 'number') {
+      this.interestRate = (this.interestRateNumberPerMonth * 1200).toString();
+    }
+    if (typeof this.numberOfMonthlyPayments === 'number') {
+      this.loanTerm = (this.numberOfMonthlyPayments / 12).toString();
+    }
   }
 
   private calcRentalYield() {
     this.calculatePaymentValue = undefined;
-    if (this.priceNumber > 0 &&
+    if (
+      this.priceNumber > 0 &&
       this.downPaymentNumber >= 0 &&
       this.downPaymentNumber <= this.priceNumber &&
       this.interestRateNumberPerMonth > 0 &&
-      this.numberOfMonthlyPayments > 0) {
-
+      this.numberOfMonthlyPayments > 0
+    ) {
       const p = this.priceNumber - this.downPaymentNumber;
       const r = this.interestRateNumberPerMonth;
-      const n = this.numberOfMonthlyPayments
+      const n = this.numberOfMonthlyPayments;
       const a = Math.pow(1 + r, n);
 
-      const calculatedPayment = p * (r * a) / (a - 1);
+      const calculatedPayment = (p * (r * a)) / (a - 1);
 
       if (calculatedPayment > 0 && calculatedPayment <= p) {
         if (this.paymentFrequency === 'monthly') {
@@ -124,13 +168,16 @@ export class MortgageCostComponent {
   }
 
   private updateDownPaymentValue(downPaymentPercentNumber, priceNumber): void {
-    this.downPaymentNumber = Math.round(downPaymentPercentNumber * priceNumber / 100);
+    this.downPaymentNumber = Math.round(
+      (downPaymentPercentNumber * priceNumber) / 100
+    );
     this.downPayment = `$ ${this.downPaymentNumber}`;
   }
 
   private updateDownPaymentPercentValue(downPaymentNumber, priceNumber): void {
-    this.downPaymentPercentNumber = Math.round(downPaymentNumber * 100 / priceNumber);
-    this.downPaymentPercent = `${this.downPaymentPercentNumber} %`
+    this.downPaymentPercentNumber = Math.round(
+      (downPaymentNumber * 100) / priceNumber
+    );
+    this.downPaymentPercent = `${this.downPaymentPercentNumber} %`;
   }
-
 }
